@@ -41,6 +41,8 @@ exports.post = async (repository, validationContract, req, res) => {
       res.status(500).send({ message: 'Internal server error', error: e });
     }
   };
+
+
   exports.get = async (repository, req, res) => {
     try {
       const resultado = await repository.getAll();
@@ -49,6 +51,8 @@ exports.post = async (repository, validationContract, req, res) => {
       res.status(500).send({ message: 'Erro no processamento', error: erro });
     }
   };
+
+
   exports.getMyAll = async (repository, req, res) => {
     try {
       const resultado = await repository.getMyAll(req.usuarioLogado.user);

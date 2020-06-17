@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
   const [, token] = authHeader.split(' ');
   if (token) {
     try {
-      const decoded = await jwt.verify(token, variables.Security.secretKey);
+      const decoded = await jwt.verify(token, variables.Security.secrectKey);
       req.usuarioLogado = decoded;
       const userExiste = await usuario.findById(req.usuarioLogado.user._id);
       if (!userExiste) {

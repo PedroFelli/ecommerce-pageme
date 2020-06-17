@@ -42,6 +42,7 @@ userController.prototype.post = async (req, res) => {
     res.status(500).send({ message: 'Internal server error', error: e });
   }
 };
+
 userController.prototype.put = async (req, res) => {
   const _validationContract = new validation();
   _validationContract.isRequired(req.body.nome, 'Informe seu nome pentelho');
@@ -124,7 +125,7 @@ userController.prototype.authenticate = async (req, res) => {
         usuario: usuarioEncontrado,
         token: jwt.sign(
           { user: usuarioEncontrado },
-          variables.Security.secretKey,
+          variables.Security.secrectKey,
         ),
       });
   } else {
