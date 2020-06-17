@@ -27,9 +27,11 @@ const userModel = new schema({
     }
 },{versionKey: false});
 
-userModel:pre('save', next=> {
-    let agora = new Date();
-    if(!this.createdAt) this.createdAt = agora;
+userModel.pre('save', (next) => {
+    const agora = new Date();
+
+    if (!this.createdAt) this.createdAt = agora;
+
     next();
 });
 
