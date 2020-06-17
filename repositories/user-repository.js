@@ -1,7 +1,7 @@
-import '../models/user-model';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import base from'../bin/base/repository-base';
+require('../models/user-model');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const base = require('../bin/base/repository-base');
 
 class userRepository {
   constructor() {

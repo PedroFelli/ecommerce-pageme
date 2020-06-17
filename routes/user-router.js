@@ -1,9 +1,9 @@
-import express from 'express';
-import controller from '../controllers/user-controller';
-import auth from '../middlewares/authentication';
-
+const express = require('express');
 
 const router = express.Router();
+const controller = require('../controllers/user-controller');
+const auth = require('../middlewares/authentication');
+
 const _ctrl = new controller();
 
 router.post('/register', _ctrl.post);

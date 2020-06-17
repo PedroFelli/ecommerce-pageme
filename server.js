@@ -1,5 +1,5 @@
 'use strict';
-import 'dotenv/config';
+require ('dotenv/config');
 
 const app = require('./bin/express');
 const server = require('http').Server(app);

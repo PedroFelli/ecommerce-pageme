@@ -5,7 +5,6 @@
   "author": "Pedro Fellipe",
   "license": "MIT",
   "scripts": {
-    "start": "yarn dev",
     "dev": "nodemon server.js"
   },
   "dependencies": {
