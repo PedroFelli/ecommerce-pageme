@@ -6,7 +6,7 @@ const  variables = {
         secrectKey:process.env.secrectKey
     },
     Pagarme:{
-        pagarmeKey:process.env.pagarmeKey
+        pagarmeKey:process.env.pagarmeKeyTest
     }
 }
 

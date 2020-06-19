@@ -16,12 +16,13 @@ const moment = require('moment');
 function transactionController() {}
 
 transactionController.prototype.post = async (req, res) => {
+
     try {
         const _validationContract = new validation();
         _validationContract.isRequired(req.body.cpf, 'Informe seu cpf pentelho');
         const data = req.body;
-        const encryption_key = variables.Pagarme.pagarmeKeyTest;
-        const client = await pagarme.client.connect({ api_key: encryption_key });
+        const encryption_key = variables.Pagarme.pagarmeKey;
+        const client = await pagarme.client.connect({ api_key: 'ak_test_X67tW1Ims0XD31CkXsDPYf79g92lE2' });
         if (data.card_id) {
             const card = await _repoCard.getById(data.card_id);
             const pagarmeTransaction = await client.transactions.create({
@@ -73,29 +74,30 @@ transactionController.prototype.post = async (req, res) => {
             await _repoUser.updatePayment(datav, req.usuarioLogado.user._id);
             res.status(200).send(transactionCreated);
         } else {
-            const bytes = CryptoJS.AES.decrypt(
-                data.card_hash,
-                'hdfudhuidfhudhudah9d8s8f9d8a98as9d8s9d89as',
-            );
-            const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-            const cardToHash = {
-                card_number: decryptedData.card_number,
-                card_holder_name: decryptedData.card_holder_name,
-                card_cvv: decryptedData.card_cvv,
-                card_expiration_date: decryptedData.card_expiration_date,
-            };
-            const cardHash = await client.security.encrypt(cardToHash);
+            // const bytes = CryptoJS.AES.decrypt(
+            //     data.card_hash,
+            //     'hdfudhuidfhudhudah9d8s8f9d8a98as9d8s9d89as',
+            // );
+            //
+            // console.log("chegou aqui");
+            // const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+            // const cardHash = await client.security.encrypt(cardToHash);
+
             const pagarmeTransaction = await client.transactions.create({
                 amount: 6000,
-                payment_method: 'credit_card',
-                card_hash: cardHash,
+                payment_method: 'card_ckble1udp02kn2s6f5kbbl2hw',
+                 card_hash: cardHash,
+                // card_number: "4111111111111111",
+                // card_cvv: "123",
+                // card_expiration_date: "0922",
+                // card_holder_name: "Morpheus Fishburne",
                 customer: {
                     name: data.name,
                     external_id: '#3311',
                     email: data.email,
                     type: 'individual',
                     country: 'br',
-                    phone_numbers: [`+${data.phone}`],
+                    phone_numbers: ["+5511999998888", "+5511888889999"],
                     documents: [
                         {
                             type: 'cpf',

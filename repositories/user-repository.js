@@ -12,8 +12,8 @@ class userRepository {
   async authenticate(Email, Senha, flag) {
     const user = await this._base._model.findOne({ email: Email });
     const userR = await this._base._model.findOne(
-      { email: Email },
-      this._projection,
+        { email: Email },
+        this._projection,
     );
     if (await bcrypt.compareSync(Senha, user.senha)) {
       return userR;
@@ -28,8 +28,8 @@ class userRepository {
   async create(data, req) {
     const userCriado = await this._base.create(data);
     const userR = await this._base._model.findOne(
-      { _id: userCriado._id },
-      this._projection,
+        { _id: userCriado._id },
+        this._projection,
     );
     return userR;
   }
@@ -41,11 +41,11 @@ class userRepository {
   async update(id, data, usuarioLogado) {
     if (usuarioLogado._id === id) {
       if (
-        data.oldPassword !== data.senha &&
-        data.oldPassword &&
-        data.senha !== undefined &&
-        data.senhaConfirmacao !== undefined &&
-        data.senha === data.senhaConfirmacao
+          data.oldPassword !== data.senha &&
+          data.oldPassword &&
+          data.senha !== undefined &&
+          data.senhaConfirmacao !== undefined &&
+          data.senha === data.senhaConfirmacao
       ) {
         const user = await this._base._model.findOne({ _id: id });
         if (await bcrypt.compareSync(data.oldPassword, user.senha)) {
@@ -65,8 +65,8 @@ class userRepository {
             senha: _hashSenha,
           });
           return this._base._model.findById(
-            usuarioAtualizado._id,
-            this._projection,
+              usuarioAtualizado._id,
+              this._projection,
           );
         }
         return { message: 'Senha inválida' };

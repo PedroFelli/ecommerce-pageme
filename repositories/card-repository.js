@@ -1,3 +1,4 @@
+
 require('../models/card-model');
 const base = require('../bin/base/repository-base');
 

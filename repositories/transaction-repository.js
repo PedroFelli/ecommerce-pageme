@@ -10,6 +10,10 @@ class transactionRepository {
         return await this._base.getMyAll(user);
     }
 
+    async getById(id) {
+        return await this._base.getById(id);
+    }
+
     async delete(id, user) {
         const model = await this._base.getById(id);
         if (model.userId.toString() === user._id) {
